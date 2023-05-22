@@ -27,9 +27,9 @@ resource "aws_iam_service_linked_role" "es" {
   aws_service_name = "es.amazonaws.com"
 }
 
-resource "aws_elasticsearch_domain" "opensearch" {
+resource "aws_opensearch_domain" "opensearch" {
   domain_name           = var.cluster_name
-  elasticsearch_version = "OpenSearch_${var.cluster_version}"
+  engine_version        = "OpenSearch_${var.cluster_version}"
   access_policies       = var.access_policies != null ? var.access_policies : data.aws_iam_policy_document.access_policy.json
   advanced_options      = merge(local.advanced_options_defaults, var.advanced_options)
 
@@ -59,10 +59,11 @@ resource "aws_elasticsearch_domain" "opensearch" {
     for_each = var.advanced_security_options_enabled ? [true] : []
     content {
       enabled                        = var.advanced_security_options_enabled
-      internal_user_database_enabled = false
+      internal_user_database_enabled = true
 
       master_user_options {
-        master_user_arn = (var.master_user_arn != "") ? var.master_user_arn : data.aws_caller_identity.current.arn
+        master_user_name     = var.master_user_name
+        master_user_password = var.master_user_password
       }
     }
   }
@@ -101,9 +102,9 @@ resource "aws_elasticsearch_domain" "opensearch" {
   depends_on = [aws_iam_service_linked_role.es]
 }
 
-resource "aws_elasticsearch_domain_saml_options" "opensearch" {
+resource "aws_opensearch_domain_saml_options" "opensearch" {
   count       = var.saml_enabled ? 1 : 0
-  domain_name = aws_elasticsearch_domain.opensearch.domain_name
+  domain_name = aws_opensearch_domain.opensearch.domain_name
 
   saml_options {
     enabled                 = true
@@ -126,5 +127,5 @@ resource "aws_route53_record" "opensearch" {
   type    = "CNAME"
   ttl     = "60"
 
-  records = [aws_elasticsearch_domain.opensearch.endpoint]
+  records = [aws_opensearch_domain.opensearch.endpoint]
 }

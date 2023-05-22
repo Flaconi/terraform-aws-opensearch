@@ -27,8 +27,14 @@ variable "create_service_role" {
   default     = true
 }
 
-variable "master_user_arn" {
-  description = "The ARN for the master user of the cluster. If not specified, then it defaults to using the IAM user that is making the request."
+variable "master_user_name" {
+  description = "The master user of the cluster."
+  type        = string
+  default     = ""
+}
+
+variable "master_user_password" {
+  description = "The master password of the cluster."
   type        = string
   default     = ""
 }
@@ -42,7 +48,7 @@ variable "master_instance_enabled" {
 variable "master_instance_type" {
   description = "The type of EC2 instances to run for each master node. A list of available instance types can you find at https://aws.amazon.com/en/opensearch-service/pricing/#On-Demand_instance_pricing"
   type        = string
-  default     = "r6gd.large.elasticsearch"
+  default     = "r6gd.large.search"
 
   validation {
     condition     = can(regex("^[t3|m3|r3|i3|i2|r6gd|c6g]", var.master_instance_type))
@@ -59,7 +65,7 @@ variable "master_instance_count" {
 variable "hot_instance_type" {
   description = "The type of EC2 instances to run for each hot node. A list of available instance types can you find at https://aws.amazon.com/en/opensearch-service/pricing/#On-Demand_instance_pricing"
   type        = string
-  default     = "r6gd.4xlarge.elasticsearch"
+  default     = "r6gd.4xlarge.search"
 
   validation {
     condition     = can(regex("^[t3|m3|r3|i3|i2|r6gd|c6g]", var.hot_instance_type))
@@ -82,7 +88,7 @@ variable "warm_instance_enabled" {
 variable "warm_instance_type" {
   description = "The type of EC2 instances to run for each warm node. A list of available instance types can you find at https://aws.amazon.com/en/elasticsearch-service/pricing/#UltraWarm_pricing"
   type        = string
-  default     = "ultrawarm1.large.elasticsearch"
+  default     = "ultrawarm1.large.search"
 }
 
 variable "warm_instance_count" {
