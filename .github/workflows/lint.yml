@@ -1,62 +1,27 @@
 ---
 
-# -------------------------------------------------------------------------------------------------
-# Job Name
-# -------------------------------------------------------------------------------------------------
-name: lint
+###
+### Lints all generic and json files in the whole git repository
+###
 
-
-# -------------------------------------------------------------------------------------------------
-# When to run
-# -------------------------------------------------------------------------------------------------
+name: linting
 on:
-  # Runs on Pull Requests
   pull_request:
+  push:
+    branches:
+      - master
+    tags:
 
-
-# -------------------------------------------------------------------------------------------------
-# What to run
-# -------------------------------------------------------------------------------------------------
 jobs:
   lint:
-    name: "Lint"
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: False
-      matrix:
-        target:
-          - lint
-          - gen
-
     steps:
-      # ------------------------------------------------------------
-      # Setup repository
-      # ------------------------------------------------------------
       - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v3
 
-      # ------------------------------------------------------------
-      # Lint repository
-      # ------------------------------------------------------------
-      - name: "make ${{ matrix.target }}"
+      - name: Terraform lint
+        uses: actionshub/terraform-lint@2.0.1
+
+      - name: Files lint
         run: |
-          retry() {
-            for n in $(seq ${RETRIES}); do
-              echo "[${n}/${RETRIES}] ${*}";
-              if eval "${*}"; then
-                echo "[SUCC] ${n}/${RETRIES}";
-                return 0;
-              fi;
-              sleep 2;
-              echo "[FAIL] ${n}/${RETRIES}";
-            done;
-            return 1;
-          }
-
-          retry make "${TARGET}"
-          git diff --quiet || { echo "Build Changes"; git diff; git status; false; }
-        env:
-          TARGET: ${{ matrix.target }}
-          RETRIES: 20
+          make "lint"
