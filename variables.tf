@@ -187,10 +187,40 @@ variable "saml_master_user_name" {
   default     = null
 }
 
+variable "roles" {
+  description = "A map of all roles to create."
+  type        = map(any)
+  default     = {}
+}
+
+variable "role_files" {
+  description = "A set of all role files to create."
+  type        = set(string)
+  default     = []
+}
+
+variable "role_mappings" {
+  description = "A map of all role mappings to create."
+  type        = map(any)
+  default     = {}
+}
+
+variable "role_mapping_files" {
+  description = "A set of all role mapping files to create."
+  type        = set(string)
+  default     = []
+}
+
 variable "tags" {
   description = "A map of tags to add to all resources."
   type        = map(string)
   default     = {}
+}
+
+variable "custom_endpoint" {
+  description = "Fully qualified domain for your custom endpoint. If not specified, then it defaults to <cluster_name>.<cluster_domain>"
+  type        = string
+  default     = null
 }
 
 variable "custom_endpoint_certificate_arn" {
