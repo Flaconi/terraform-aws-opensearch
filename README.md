@@ -13,13 +13,14 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
+| <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | >= 2.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_elasticsearch"></a> [elasticsearch](#provider\_elasticsearch) | n/a |
+| <a name="provider_elasticsearch"></a> [elasticsearch](#provider\_elasticsearch) | >= 2.0.0 |
 
 ## Modules
 
@@ -36,10 +37,10 @@
 | [aws_opensearch_domain.opensearch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) | resource |
 | [aws_opensearch_domain_saml_options.opensearch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain_saml_options) | resource |
 | [aws_route53_record.opensearch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [elasticsearch_opensearch_role.role](https://registry.terraform.io/providers/hashicorp/elasticsearch/latest/docs/resources/opensearch_role) | resource |
-| [elasticsearch_opensearch_roles_mapping.master_user_arn](https://registry.terraform.io/providers/hashicorp/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
-| [elasticsearch_opensearch_roles_mapping.master_user_name](https://registry.terraform.io/providers/hashicorp/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
-| [elasticsearch_opensearch_roles_mapping.role_mapping](https://registry.terraform.io/providers/hashicorp/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
+| [elasticsearch_opensearch_role.role](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_role) | resource |
+| [elasticsearch_opensearch_roles_mapping.master_user_arn](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
+| [elasticsearch_opensearch_roles_mapping.master_user_name](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
+| [elasticsearch_opensearch_roles_mapping.role_mapping](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.access_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
