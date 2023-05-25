@@ -39,6 +39,12 @@ variable "master_user_password" {
   default     = ""
 }
 
+variable "master_user_arn" {
+  description = "The ARN for the master user of the cluster. If not specified, then it defaults to using the IAM user that is making the request."
+  type        = string
+  default     = ""
+}
+
 variable "master_instance_enabled" {
   description = "Indicates whether dedicated master nodes are enabled for the cluster."
   type        = bool
@@ -243,6 +249,18 @@ variable "advanced_security_options_enabled" {
 
 variable "access_policies" {
   description = "IAM policy document specifying the access policies for the domain."
+  type        = string
+  default     = null
+}
+
+variable "advanced_security_options_internal_user_database_enabled" {
+  description = "Whether to enable or not internal Kibana user database for ELK OpenDistro security plugin"
+  type        = bool
+  default     = false
+}
+
+variable "advanced_security_options_master_user_name" {
+  description = "Master user username (applicable if advanced_security_options_internal_user_database_enabled set to true)"
   type        = string
   default     = null
 }
