@@ -59,7 +59,7 @@ resource "aws_opensearch_domain" "opensearch" {
     for_each = var.advanced_security_options_enabled ? [true] : []
     content {
       enabled                        = var.advanced_security_options_enabled
-      internal_user_database_enabled = true
+      internal_user_database_enabled = var.advanced_security_options_internal_user_database_enabled
 
       master_user_options {
         master_user_name     = var.master_user_name

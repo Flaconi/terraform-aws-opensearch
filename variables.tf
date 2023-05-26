@@ -217,6 +217,12 @@ variable "advanced_security_options_enabled" {
   default     = true
 }
 
+variable "advanced_security_options_internal_user_database_enabled" {
+  description = "Whether to enable or not internal Kibana user database for ELK OpenDistro security plugin"
+  type        = bool
+  default     = true
+}
+
 variable "access_policies" {
   description = "IAM policy document specifying the access policies for the domain."
   type        = string
