@@ -39,12 +39,6 @@ variable "master_user_password" {
   default     = ""
 }
 
-variable "master_user_arn" {
-  description = "The ARN for the master user of the cluster. If not specified, then it defaults to using the IAM user that is making the request."
-  type        = string
-  default     = ""
-}
-
 variable "master_instance_enabled" {
   description = "Indicates whether dedicated master nodes are enabled for the cluster."
   type        = bool
@@ -193,30 +187,6 @@ variable "saml_master_user_name" {
   default     = null
 }
 
-variable "roles" {
-  description = "A map of all roles to create."
-  type        = map(any)
-  default     = {}
-}
-
-variable "role_files" {
-  description = "A set of all role files to create."
-  type        = set(string)
-  default     = []
-}
-
-variable "role_mappings" {
-  description = "A map of all role mappings to create."
-  type        = map(any)
-  default     = {}
-}
-
-variable "role_mapping_files" {
-  description = "A set of all role mapping files to create."
-  type        = set(string)
-  default     = []
-}
-
 variable "tags" {
   description = "A map of tags to add to all resources."
   type        = map(string)
@@ -249,18 +219,6 @@ variable "advanced_security_options_enabled" {
 
 variable "access_policies" {
   description = "IAM policy document specifying the access policies for the domain."
-  type        = string
-  default     = null
-}
-
-variable "advanced_security_options_internal_user_database_enabled" {
-  description = "Whether to enable or not internal Kibana user database for ELK OpenDistro security plugin"
-  type        = bool
-  default     = false
-}
-
-variable "advanced_security_options_master_user_name" {
-  description = "Master user username (applicable if advanced_security_options_internal_user_database_enabled set to true)"
   type        = string
   default     = null
 }

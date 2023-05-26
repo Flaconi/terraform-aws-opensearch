@@ -13,14 +13,12 @@
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.13 |
-| <a name="requirement_elasticsearch"></a> [elasticsearch](#requirement\_elasticsearch) | >= 2.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
-| <a name="provider_elasticsearch"></a> [elasticsearch](#provider\_elasticsearch) | >= 2.0.0 |
 
 ## Modules
 
@@ -37,10 +35,6 @@
 | [aws_opensearch_domain.opensearch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain) | resource |
 | [aws_opensearch_domain_saml_options.opensearch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/opensearch_domain_saml_options) | resource |
 | [aws_route53_record.opensearch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route53_record) | resource |
-| [elasticsearch_opensearch_role.role](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_role) | resource |
-| [elasticsearch_opensearch_roles_mapping.master_user_arn](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
-| [elasticsearch_opensearch_roles_mapping.master_user_name](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
-| [elasticsearch_opensearch_roles_mapping.role_mapping](https://registry.terraform.io/providers/phillbaker/elasticsearch/latest/docs/resources/opensearch_roles_mapping) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.access_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
@@ -54,8 +48,6 @@
 | <a name="input_access_policies"></a> [access\_policies](#input\_access\_policies) | IAM policy document specifying the access policies for the domain. | `string` | `null` | no |
 | <a name="input_advanced_options"></a> [advanced\_options](#input\_advanced\_options) | Key-value string pairs to specify advanced configuration options. | `map(string)` | `{}` | no |
 | <a name="input_advanced_security_options_enabled"></a> [advanced\_security\_options\_enabled](#input\_advanced\_security\_options\_enabled) | Whether advanced security is enabled. | `bool` | `true` | no |
-| <a name="input_advanced_security_options_internal_user_database_enabled"></a> [advanced\_security\_options\_internal\_user\_database\_enabled](#input\_advanced\_security\_options\_internal\_user\_database\_enabled) | Whether to enable or not internal Kibana user database for ELK OpenDistro security plugin | `bool` | `false` | no |
-| <a name="input_advanced_security_options_master_user_name"></a> [advanced\_security\_options\_master\_user\_name](#input\_advanced\_security\_options\_master\_user\_name) | Master user username (applicable if advanced\_security\_options\_internal\_user\_database\_enabled set to true) | `string` | `null` | no |
 | <a name="input_availability_zones"></a> [availability\_zones](#input\_availability\_zones) | The number of availability zones for the OpenSearch cluster. Valid values: 1, 2 or 3. | `number` | `3` | no |
 | <a name="input_cluster_domain_private"></a> [cluster\_domain\_private](#input\_cluster\_domain\_private) | Indicates whether to create records in a private (true) or public (false) zone | `bool` | `false` | no |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | The name of the OpenSearch cluster. | `string` | `"opensearch"` | no |
@@ -74,13 +66,8 @@
 | <a name="input_master_instance_count"></a> [master\_instance\_count](#input\_master\_instance\_count) | The number of dedicated master nodes in the cluster. | `number` | `3` | no |
 | <a name="input_master_instance_enabled"></a> [master\_instance\_enabled](#input\_master\_instance\_enabled) | Indicates whether dedicated master nodes are enabled for the cluster. | `bool` | `true` | no |
 | <a name="input_master_instance_type"></a> [master\_instance\_type](#input\_master\_instance\_type) | The type of EC2 instances to run for each master node. A list of available instance types can you find at https://aws.amazon.com/en/opensearch-service/pricing/#On-Demand_instance_pricing | `string` | `"r6gd.large.search"` | no |
-| <a name="input_master_user_arn"></a> [master\_user\_arn](#input\_master\_user\_arn) | The ARN for the master user of the cluster. If not specified, then it defaults to using the IAM user that is making the request. | `string` | `""` | no |
 | <a name="input_master_user_name"></a> [master\_user\_name](#input\_master\_user\_name) | The master user of the cluster. | `string` | `""` | no |
 | <a name="input_master_user_password"></a> [master\_user\_password](#input\_master\_user\_password) | The master password of the cluster. | `string` | `""` | no |
-| <a name="input_role_files"></a> [role\_files](#input\_role\_files) | A set of all role files to create. | `set(string)` | `[]` | no |
-| <a name="input_role_mapping_files"></a> [role\_mapping\_files](#input\_role\_mapping\_files) | A set of all role mapping files to create. | `set(string)` | `[]` | no |
-| <a name="input_role_mappings"></a> [role\_mappings](#input\_role\_mappings) | A map of all role mappings to create. | `map(any)` | `{}` | no |
-| <a name="input_roles"></a> [roles](#input\_roles) | A map of all roles to create. | `map(any)` | `{}` | no |
 | <a name="input_saml_enabled"></a> [saml\_enabled](#input\_saml\_enabled) | Indicates whether to configure SAML for the OpenSearch dashboard. | `bool` | `true` | no |
 | <a name="input_saml_entity_id"></a> [saml\_entity\_id](#input\_saml\_entity\_id) | The unique Entity ID of the application in SAML Identity Provider. | `string` | `""` | no |
 | <a name="input_saml_master_backend_role"></a> [saml\_master\_backend\_role](#input\_saml\_master\_backend\_role) | This backend role receives full permissions to the cluster, equivalent to a new master role, but can only use those permissions within Dashboards. | `string` | `null` | no |
