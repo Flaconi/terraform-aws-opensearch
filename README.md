@@ -45,6 +45,14 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+### <a name="input_account_assume_role"></a> [account\_assume\_role](#input\_account\_assume\_role)
+
+Description: A name of assume role used in the AWS account to execute terraform.
+
+Type: `string`
+
+Default: `"ASSUME-ATLANTIS"`
+
 ### <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)
 
 Description: The name of the OpenSearch cluster.
@@ -227,7 +235,7 @@ Description: Element of the SAML assertion to use for username.
 
 Type: `string`
 
-Default: `"http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"`
+Default: `""`
 
 ### <a name="input_saml_roles_key"></a> [saml\_roles\_key](#input\_saml\_roles\_key)
 
@@ -235,7 +243,7 @@ Description: Element of the SAML assertion to use for backend roles.
 
 Type: `string`
 
-Default: `"http://schemas.microsoft.com/ws/2008/06/identity/claims/role"`
+Default: `""`
 
 ### <a name="input_saml_entity_id"></a> [saml\_entity\_id](#input\_saml\_entity\_id)
 
