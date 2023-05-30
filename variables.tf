@@ -1,3 +1,9 @@
+variable "account_assume_role" {
+  description = "A name of assume role used in the AWS account to execute terraform."
+  type        = string
+  default     = "ASSUME-ATLANTIS"
+}
+
 variable "cluster_name" {
   description = "The name of the OpenSearch cluster."
   type        = string
@@ -49,11 +55,6 @@ variable "master_instance_type" {
   description = "The type of EC2 instances to run for each master node. A list of available instance types can you find at https://aws.amazon.com/en/opensearch-service/pricing/#On-Demand_instance_pricing"
   type        = string
   default     = "r6gd.large.search"
-
-  validation {
-    condition     = can(regex("^[t3|m3|r3|i3|i2|r6gd|c6g]", var.master_instance_type))
-    error_message = "The EC2 master_instance_type must provide a SSD or NVMe-based local storage."
-  }
 }
 
 variable "master_instance_count" {
@@ -66,11 +67,6 @@ variable "hot_instance_type" {
   description = "The type of EC2 instances to run for each hot node. A list of available instance types can you find at https://aws.amazon.com/en/opensearch-service/pricing/#On-Demand_instance_pricing"
   type        = string
   default     = "r6gd.4xlarge.search"
-
-  validation {
-    condition     = can(regex("^[t3|m3|r3|i3|i2|r6gd|c6g]", var.hot_instance_type))
-    error_message = "The EC2 hot_instance_type must provide a SSD or NVMe-based local storage."
-  }
 }
 
 variable "hot_instance_count" {
@@ -148,13 +144,13 @@ variable "saml_enabled" {
 variable "saml_subject_key" {
   description = "Element of the SAML assertion to use for username."
   type        = string
-  default     = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+  default     = ""
 }
 
 variable "saml_roles_key" {
   description = "Element of the SAML assertion to use for backend roles."
   type        = string
-  default     = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+  default     = ""
 }
 
 variable "saml_entity_id" {
