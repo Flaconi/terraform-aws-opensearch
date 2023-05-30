@@ -1,8 +1,3 @@
-moved {
-  from = module.acm
-  to   = module.acm[0]
-}
-
 # Create the AWS KMS key
 resource "aws_kms_key" "opensearch_encryption_key" {
   description             = "KMS key for OpenSearch cluster encryption"
