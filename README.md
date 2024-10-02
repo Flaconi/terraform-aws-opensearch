@@ -17,7 +17,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5 |
 
 <!-- TFDOCS_PROVIDER_END -->
 
@@ -26,7 +26,8 @@
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5 |
 
 <!-- TFDOCS_REQUIREMENTS_END -->
 
@@ -44,14 +45,6 @@ Type: `string`
 ## Optional Inputs
 
 The following input variables are optional (have default values):
-
-### <a name="input_account_assume_role"></a> [account\_assume\_role](#input\_account\_assume\_role)
-
-Description: A name of assume role used in the AWS account to execute terraform.
-
-Type: `string`
-
-Default: `"ASSUME-ATLANTIS"`
 
 ### <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name)
 

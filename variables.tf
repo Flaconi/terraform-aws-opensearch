@@ -1,9 +1,3 @@
-variable "account_assume_role" {
-  description = "A name of assume role used in the AWS account to execute terraform."
-  type        = string
-  default     = "ASSUME-ATLANTIS"
-}
-
 variable "cluster_name" {
   description = "The name of the OpenSearch cluster."
   type        = string
