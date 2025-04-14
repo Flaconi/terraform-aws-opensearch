@@ -92,29 +92,29 @@ resource "aws_opensearch_domain" "opensearch" {
     }
   }
 
-    log_publishing_options {
-      enabled  = false
-      log_type = "AUDIT_LOGS"
-      cloudwatch_log_group_arn = ""
-    }
-  
-    log_publishing_options {
-      enabled  = false
-      log_type = "ES_APPLICATION_LOGS"
-      cloudwatch_log_group_arn = ""
-    }
-  
-    log_publishing_options {
-      enabled  = false
-      log_type = "INDEX_SLOW_LOGS"
-      cloudwatch_log_group_arn = ""
-    }
-  
-    log_publishing_options {
-      enabled  = false
-      log_type = "SEARCH_SLOW_LOGS"
-      cloudwatch_log_group_arn = ""
-    }
+  log_publishing_options {
+    enabled                  = false
+    log_type                 = "AUDIT_LOGS"
+    cloudwatch_log_group_arn = ""
+  }
+
+  log_publishing_options {
+    enabled                  = false
+    log_type                 = "ES_APPLICATION_LOGS"
+    cloudwatch_log_group_arn = ""
+  }
+
+  log_publishing_options {
+    enabled                  = false
+    log_type                 = "INDEX_SLOW_LOGS"
+    cloudwatch_log_group_arn = ""
+  }
+
+  log_publishing_options {
+    enabled                  = false
+    log_type                 = "SEARCH_SLOW_LOGS"
+    cloudwatch_log_group_arn = ""
+  }
 
   tags = var.tags
 
