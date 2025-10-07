@@ -1,13 +1,20 @@
 # Create the AWS KMS key
-resource "aws_kms_key" "opensearch_encryption_key" {
+resource "aws_kms_key" "this" {
   description             = "KMS key for OpenSearch cluster encryption"
+  enable_key_rotation     = true
+  rotation_period_in_days = 365
   deletion_window_in_days = 10
+}
+
+resource "aws_kms_alias" "this" {
+  name          = "alias/${var.cluster_name}/storage"
+  target_key_id = aws_kms_key.this.key_id
 }
 
 module "acm" {
   count   = (var.custom_endpoint_certificate_arn != "") ? 0 : 1
   source  = "terraform-aws-modules/acm/aws"
-  version = "~> 4.3.1"
+  version = "5.2.0"
 
   domain_name = "${var.cluster_name}.${data.aws_route53_zone.opensearch.name}"
   zone_id     = data.aws_route53_zone.opensearch.id
@@ -78,7 +85,7 @@ resource "aws_opensearch_domain" "opensearch" {
 
   encrypt_at_rest {
     enabled    = true
-    kms_key_id = aws_kms_key.opensearch_encryption_key.key_id
+    kms_key_id = aws_kms_key.this.key_id
   }
 
   dynamic "ebs_options" {
