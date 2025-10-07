@@ -16,6 +16,8 @@ module "acm" {
   source  = "terraform-aws-modules/acm/aws"
   version = "5.2.0"
 
+  validation_method = "DNS"
+
   domain_name = "${var.cluster_name}.${data.aws_route53_zone.opensearch.name}"
   zone_id     = data.aws_route53_zone.opensearch.id
 
